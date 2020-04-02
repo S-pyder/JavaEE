@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- #新增这里 -->
+
+    <bean id="myName" class="java.lang.String">
+        <constructor-arg value="小比特"/>
+    </bean>
+
+
+    <bean id="animal1" class="com.test.Animal">
+        <constructor-arg name="name" value="鸡"/>
+        <constructor-arg name="num" value="1"/>
+    </bean>
+
+    <bean id="animal2" class="com.test.Animal">
+        <constructor-arg name="name" ref="myName"/>
+        <constructor-arg name="num" value="2"/>
+    </bean>
+
+    <bean id="animal3" class="com.test.Animal">
+        <property name="name" ref="myName"/>
+        <property name="num" value="3"/>
+    </bean>
+
+    <bean id="animal4" class="com.test.AnimalFactory" factory-method="createAnimal"/>
+
+    <bean id="animalFactory2" class="com.test.AnimalFactory2"/>
+    <bean id="animal5" factory-bean="animalFactory2" factory-method="newInstance"/>
+
+    <!--
+    1）属性 setter 注入(property)
+    指 IoC 容器使用 setter 方法注入被依赖的实例。通过调用无参构造器或无参 static 工厂方法实例化 bean 后，调用该 bean 的 setter 方法，即可实现基于 setter 的 DI。
+    2）构造方法注入(constructor-arg)
+    指 IoC 容器使用构造方法注入被依赖的实例。基于构造器的 DI 通过调用带参数的构造方法实现，每个参数代表一个依赖。
+    -->
+
+</beans>
